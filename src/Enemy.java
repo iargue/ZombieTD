@@ -3,6 +3,7 @@ import java.awt.*;
 public class Enemy extends Rectangle {
 	
 	public int xC, yC;
+	public int walkFrame = 0, walkSpeed = 10;
 	
 	public int enemySize = 54;
 	public int enemyID;
@@ -14,7 +15,7 @@ public class Enemy extends Rectangle {
 	public boolean inGame = false;
 	public boolean wasDown = false, wasUp = false, wasRight = false, wasLeft = false;
 	
-	public void spawnEnemy(int enemyID) {
+	public void spawnEnemy() {
 		for(int x = 0; x < Screen.room.block[0].length; x++) {
 			if(Screen.room.block[0][x].groundID == Value.pathOpen) {
 				setBounds(Screen.room.block[0][x].x, Screen.room.block[0][x].y, enemySize, enemySize);
@@ -22,9 +23,8 @@ public class Enemy extends Rectangle {
 				yC = y;
 			}
 		}
-		
-		this.enemyID = enemyID;
-		
+		walkSpeed = 10;
+	    walkFrame = 0;
 		inGame = true;
 	}
 	
@@ -36,7 +36,7 @@ public class Enemy extends Rectangle {
 		Screen.myHealth -= 1;
 	}
 	
-	public int walkFrame = 0, walkSpeed = 40;
+	
 	
 	public void physic() {
 		

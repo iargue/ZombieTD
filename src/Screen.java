@@ -69,12 +69,12 @@ public class Screen extends JPanel implements Runnable {
 		}
 	}
 	
-	public int spawnTime = 5000, spawnFrame = 0;    //spawnFrame -> spawnTime. When spawnFrame == spawnTime, enemySpawner is called.
+	public int spawnTime = 1000, spawnFrame = 0;    //spawnFrame -> spawnTime. When spawnFrame == spawnTime, enemySpawner is called.
 	public void enemySpawner() {
 		if(spawnFrame >= spawnTime) {
 			for(int i = 0; i < enemy.length; i++) {
 				if(!enemy[i].inGame) {
-					enemy[i].spawnEnemy(0);
+					enemy[i].spawnEnemy();
 					break;
 				}
 			}
@@ -97,11 +97,9 @@ public class Screen extends JPanel implements Runnable {
 				}
 			}
 			repaint();
-			
 			try {
-				Thread.sleep(1);
-			} catch(Exception e) {
-				
+				Thread.sleep(5);
+			} catch(Exception e) {				
 			}
 		}
 	}
