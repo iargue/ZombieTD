@@ -8,7 +8,7 @@ public class Screen extends JPanel implements Runnable {
 	
 	public static int myWidth, myHeight;
 	
-	public static int myHealth = 100, myCoins = 25,  myWavesRemaining;
+	public static int myHealth = 100, myCoins = 250,  myWavesRemaining;
 	
 	public static boolean isFirst = true;
 	
@@ -37,7 +37,6 @@ public class Screen extends JPanel implements Runnable {
 			myHeight = getHeight();
 			
 			define();
-			
 			isFirst = false;
 		}
 		
@@ -74,7 +73,7 @@ public class Screen extends JPanel implements Runnable {
 		if(spawnFrame >= spawnTime) {
 			for(int i = 0; i < enemy.length; i++) {
 				if(!enemy[i].inGame) {
-					enemy[i].spawnEnemy();
+					enemy[i].spawnEnemy(0);
 					break;
 				}
 			}

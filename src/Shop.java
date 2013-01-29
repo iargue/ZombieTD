@@ -12,6 +12,9 @@ public class Shop {
 	public static int heldId = -1;
 	public static int[] buttonId = {0,1,2,3,10};
 	public static int[] buttonPrice = {0,10,20,30,40,50,60,70,80,90,0};
+	public static int[] buttonRange = {0,108,54,1,1,1,1,1,1,0};
+	public static int[] buttonDamage = {0,2,1,0,0,0,0,0,0,0};
+	public static int[] buttonFire = {0,150,2000,0,0,0,0,0,0,0};
 	
 	public Rectangle[] button = new Rectangle[shopWidth];
 	
@@ -63,6 +66,9 @@ public class Shop {
 								if (Screen.room.block[y][x].contains(Screen.mse)) {
 									if (Screen.room.block[y][x].groundID == Value.groundOpen && Screen.room.block[y][x].airID == Value.airOpen) {
 										Screen.room.block[y][x].airID = heldId; 
+										Screen.room.block[y][x].towerRange = new Rectangle((Screen.room.block[y][x].x-(buttonRange[heldId])), (Screen.room.block[y][x].y-(buttonRange[heldId])), (54+(buttonRange[heldId]*2)), (54+(buttonRange[heldId]*2))); 
+										Screen.room.block[y][x].towerDamage = buttonDamage[heldId];
+										Screen.room.block[y][x].fireRate = buttonFire[heldId];
 										Screen.myCoins -= buttonPrice[heldId];
 										heldId = -1;
 										holdsItem=false;
