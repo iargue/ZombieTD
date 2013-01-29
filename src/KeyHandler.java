@@ -20,7 +20,7 @@ public class KeyHandler implements MouseMotionListener, MouseListener {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		
+		Screen.shop.click(e.getButton());
 	}
 
 	public void mouseDragged(MouseEvent e) {

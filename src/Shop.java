@@ -1,16 +1,66 @@
 import java.awt.*;
 
+import javax.swing.ImageIcon;
+
 
 public class Shop {
 	
 	public static int shopWidth = 5;
 	public static int buttonSize = 72;
 	public static int cellSpace = 8;
+	public static int itemIn = 4;
+	public static int heldId = -1;
+	public static int[] buttonId = {0,1,2,3,10};
+	public static int[] buttonPrice = {0,10,20,30,40,50,60,70,70,80,0};
 	
 	public Rectangle[] button = new Rectangle[shopWidth];
 	
+	public boolean holdsItem = false;
+	
 	public Shop() {
 		define();
+	}
+	
+	public void click(int mousebutton) {
+		if (mousebutton == 1) {
+			for(int i = 0; i < button.length; i++) {
+				if (button[i].contains(Screen.mse)) {
+					if (i == 0) {
+						buttonId[1] = buttonId[1]-1;
+						buttonId[2] = buttonId[2]-1;
+						buttonId[3] = buttonId[3]-1;
+						if (buttonId[1] == 0) {
+							buttonId[1] = 9;
+						}
+						if (buttonId[2] == 0) {
+							buttonId[2] = 9;
+						}
+						if (buttonId[3] == 0) {
+							buttonId[3] = 9;
+						}
+					} else if (i == 4) {
+						buttonId[1] = buttonId[1]+1;
+						buttonId[2] = buttonId[2]+1;
+						buttonId[3] = buttonId[3]+1;
+						if (buttonId[1] == 10) {
+							buttonId[1] = 1;
+						}
+						if (buttonId[2] == 10) {
+							buttonId[2] = 1;
+						}
+						if (buttonId[3] == 10) {
+							buttonId[3] = 1;
+						}
+					} else {
+					heldId = buttonId[i];
+					holdsItem=true;
+					}
+				}
+			}
+		} else if (mousebutton == 3) {
+			heldId = -1;
+			holdsItem=false;
+		}
 	}
 	
 	public void define() {
@@ -27,9 +77,19 @@ public class Shop {
 			g.setColor(Color.BLACK);
 			g.drawRect(button[i].x, button[i].y, button[i].width, button[i].height);
 			
+			g.drawImage(new ImageIcon("res/knights/tower" + buttonId[i] + ".png").getImage(), button[i].x + itemIn, button[i].y + itemIn, button[i].width - (itemIn*2), button[i].height - (itemIn*2), null);
+			if (buttonPrice[buttonId[i]] > 0) {
+				g.setColor(new Color(255,255,255));
+				g.setFont(new Font("Courier New", Font.BOLD, 14));
+				g.drawString(buttonPrice[buttonId[i]] + "", button[i].x + itemIn, button[i].y + itemIn + 10);
+			}
 			if(button[i].contains(Screen.mse)) {
 				g.setColor(new Color(255, 255, 255, 100));
 				g.fillRect(button[i].x, button[i].y, button[i].width, button[i].height);
+			}
+			
+			if (holdsItem) {
+				g.drawImage(new ImageIcon("res/knights/tower" + heldId + ".png").getImage(), Screen.mse.x - ((button[i].width + (itemIn*2))/2), Screen.mse.y - ((button[i].height + (itemIn*2))/2), button[i].width, button[i].height, null);
 			}
 		}
 	}
