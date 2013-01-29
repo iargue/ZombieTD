@@ -23,7 +23,7 @@ public class Block extends Rectangle {
 		target = -1;
 		if (airID > Value.airCastle) {
 			for(int i=Screen.enemy.length-1;i>-1;i--) {
-				if (Screen.enemy[i].inGame) {
+				if (Screen.enemy[i].inGame && Screen.enemy[i].isDead == false) {
 						if (towerRange.intersects(Screen.enemy[i])) {
 							target = i;
 						}
@@ -36,7 +36,8 @@ public class Block extends Rectangle {
 			Screen.enemy[target].health -= 1;
 			coolDown = fireRate;
 			if (Screen.enemy[target].health <=0) {
-				Screen.enemy[target].inGame = false;
+				Screen.enemy[target].isDead = true;
+				Screen.enemy[target].enemyWalk = 0;
 			}
 		} else {
 			coolDown -= 1;

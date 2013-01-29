@@ -13,8 +13,8 @@ public class Shop {
 	public static int[] buttonId = {0,1,2,3,10};
 	public static int[] buttonPrice = {0,10,20,30,40,50,60,70,80,90,0};
 	public static int[] buttonRange = {0,108,54,1,1,1,1,1,1,0};
-	public static int[] buttonDamage = {0,2,1,0,0,0,0,0,0,0};
-	public static int[] buttonFire = {0,150,2000,0,0,0,0,0,0,0};
+	public static int[] buttonDamage = {0,1,1,0,0,0,0,0,0,0};
+	public static int[] buttonFire = {0,2000,2000,0,0,0,0,0,0,0};
 	
 	public Rectangle[] button = new Rectangle[shopWidth];
 	

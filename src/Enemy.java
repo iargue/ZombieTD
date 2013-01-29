@@ -6,6 +6,7 @@ public class Enemy extends Rectangle {
 	public int walkFrame = 0, walkSpeed = 10;
 	public int health;
 	
+	
 	public int enemySize = 54;
 	public int enemyID;
 	public int enemyWalk = 0;
@@ -14,6 +15,7 @@ public class Enemy extends Rectangle {
 	public int direction = down;
 	
 	public boolean inGame = false;
+	public boolean isDead = false;
 	public boolean wasDown = false, wasUp = false, wasRight = false, wasLeft = false;
 
 	
@@ -33,7 +35,8 @@ public class Enemy extends Rectangle {
 	}
 	
 	public void deleteEnemy() {
-		inGame = false;
+		inGame = true;
+		isDead = true;
 	}
 	
 	public void looseHealth() {
@@ -137,7 +140,7 @@ public class Enemy extends Rectangle {
 	}
 	
 	public void draw(Graphics g) {
-		if(inGame) {
+		if(inGame && isDead == false) {
 			g.setColor(Color.WHITE);
 			g.fillRect(x, y, enemySize, enemySize);
 		}

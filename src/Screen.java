@@ -90,7 +90,7 @@ public class Screen extends JPanel implements Runnable {
 				room.physic();
 				enemySpawner();
 				for(int i = 0; i < enemy.length; i++) {
-					if(enemy[i].inGame) {
+					if(enemy[i].inGame && enemy[i].isDead == false) {
 						enemy[i].physic();
 					}
 				}
