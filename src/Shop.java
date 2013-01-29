@@ -11,7 +11,7 @@ public class Shop {
 	public static int itemIn = 4;
 	public static int heldId = -1;
 	public static int[] buttonId = {0,1,2,3,10};
-	public static int[] buttonPrice = {0,10,20,30,40,50,60,70,70,80,0};
+	public static int[] buttonPrice = {0,10,20,30,40,50,60,70,80,90,0};
 	
 	public Rectangle[] button = new Rectangle[shopWidth];
 	
@@ -26,9 +26,9 @@ public class Shop {
 			for(int i = 0; i < button.length; i++) {
 				if (button[i].contains(Screen.mse)) {
 					if (i == 0) {
-						buttonId[1] = buttonId[1]-1;
-						buttonId[2] = buttonId[2]-1;
-						buttonId[3] = buttonId[3]-1;
+						buttonId[1] -= 1;
+						buttonId[2] -= 1;
+						buttonId[3] -= 1;
 						if (buttonId[1] == 0) {
 							buttonId[1] = 9;
 						}
@@ -39,9 +39,9 @@ public class Shop {
 							buttonId[3] = 9;
 						}
 					} else if (i == 4) {
-						buttonId[1] = buttonId[1]+1;
-						buttonId[2] = buttonId[2]+1;
-						buttonId[3] = buttonId[3]+1;
+						buttonId[1] += 1;
+						buttonId[2] += 1;
+						buttonId[3] += 1;
 						if (buttonId[1] == 10) {
 							buttonId[1] = 1;
 						}
@@ -54,6 +54,22 @@ public class Shop {
 					} else {
 					heldId = buttonId[i];
 					holdsItem=true;
+					}
+				}
+				if (holdsItem==true) {
+					if (Screen.myCoins >= buttonPrice[heldId]) {
+						for (int y = 0;y<Screen.room.block.length;y++) {
+							for (int x=0;x<Screen.room.block[0].length;x++) {
+								if (Screen.room.block[y][x].contains(Screen.mse)) {
+									if (Screen.room.block[y][x].groundID == Value.groundOpen && Screen.room.block[y][x].airID == Value.airOpen) {
+										Screen.room.block[y][x].airID = heldId; 
+										Screen.myCoins -= buttonPrice[heldId];
+										heldId = -1;
+										holdsItem=false;
+									}
+								}
+							}
+						}
 					}
 				}
 			}
@@ -89,7 +105,7 @@ public class Shop {
 			}
 			
 			if (holdsItem) {
-				g.drawImage(new ImageIcon("res/knights/tower" + heldId + ".png").getImage(), Screen.mse.x - ((button[i].width + (itemIn*2))/2), Screen.mse.y - ((button[i].height + (itemIn*2))/2), button[i].width, button[i].height, null);
+				g.drawImage(new ImageIcon("res/knights/tower" + heldId + ".png").getImage(), Screen.mse.x - ((button[i].width + (itemIn*2))/2), Screen.mse.y - ((button[i].height + (itemIn*2))/2), button[i].width, button[i].height - 18, null);
 			}
 		}
 	}

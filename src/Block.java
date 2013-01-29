@@ -1,5 +1,7 @@
 import java.awt.*;
 
+import javax.swing.ImageIcon;
+
 
 public class Block extends Rectangle {
 	public int groundID;
@@ -31,6 +33,13 @@ public class Block extends Rectangle {
 			g.fillRect(x, y, width, height);
 			g.setColor(Color.BLACK);
 			g.drawRect(x, y, width, height);
+		}
+		if (airID > Value.airCastle) {
+			g.setColor(Color.GREEN);
+			g.fillRect(x, y, width, height);
+			g.setColor(Color.BLACK);
+			g.drawRect(x, y, width, height);
+			g.drawImage(new ImageIcon("res/knights/tower" + airID + ".png").getImage(),x, y, width, height, null);
 		}
 	}
 }
